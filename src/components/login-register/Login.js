@@ -25,12 +25,17 @@ export default function Login () {
     e.preventDefault()
     try {
       const { data } = await axios.post(`${baseUrl}/login`, formData)
+      console.log(data);
       localStorage.setItem("token", data.token)
       localStorage.setItem("loggedIn", true)
       navigate('/books')
     } catch {
       console.log("issues");
     }
+  }
+
+  const createAccountHandler = () => {
+    navigate('/register')
   }
 
   console.log(formData);
@@ -80,6 +85,7 @@ export default function Login () {
         <div>
           <button
             type="button"
+            onClick={createAccountHandler}
           >
             Create an account
           </button>

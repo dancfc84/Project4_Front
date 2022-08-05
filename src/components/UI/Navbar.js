@@ -1,14 +1,16 @@
 import { NavLink } from "react-router-dom"
 import React from "react"
+import CartButton from "../Cart/CartButton"
 
 
-export default function Navbar() {
+export default function Navbar(props) {
 
   return (
     <>
       <header>
         <nav>
           <div>
+
             <NavLink to="/">
               Home
             </NavLink>
@@ -24,6 +26,8 @@ export default function Navbar() {
             <NavLink to="/contact">
               Contact
             </NavLink>
+            <CartButton onClick={props.onShowCart} />
+
           </div>
         </nav>
       </header>

@@ -31,7 +31,6 @@ const LoginModal = (props) => {
     }
   }
 
-
   const typeOptions = [
     { value: "null", text: '--Choose an option--' },
     { value: 1, text: 'Paperback' },
@@ -46,7 +45,6 @@ const LoginModal = (props) => {
     { value: 4, text: 'Satisfactory' },
     { value: 5, text: 'Poor' }
   ];
-
 
 
   const handleTypeChange = event => {
@@ -64,8 +62,6 @@ const LoginModal = (props) => {
       condition_id: event.target.value,
     })
   };
-
-
 
 
   console.log(modalForm);
