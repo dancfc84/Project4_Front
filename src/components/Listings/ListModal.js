@@ -9,6 +9,7 @@ import baseUrl from "../../config"
 const LoginModal = (props) => {
 
 
+  console.log(props);
 
   const [modalForm, setModalForm] = useState({
     type_id: 0,
@@ -23,7 +24,7 @@ const LoginModal = (props) => {
       })
       console.log(data);
       props.hideModalHandler()
-
+      props.setCreatedListing(data)
     } catch (error) {
 
       console.log(error);
@@ -64,7 +65,6 @@ const LoginModal = (props) => {
   };
 
 
-  console.log(modalForm);
 
   return (
 

@@ -2,8 +2,7 @@ import React, { useContext } from "react"
 import CartContext from "../../store/cart-context"
 import baseUrl from "../../config";
 import axios from "axios";
-
-
+import { isCreator } from "../../lib/auth.js";
 import { getLoggedInUserId } from "../../lib/auth.js";
 
 
@@ -12,6 +11,7 @@ export default function BookListing(props) {
   const cartCtx = useContext(CartContext)
 
   const listing = props.listing;
+
 
   const currUser = getLoggedInUserId();
 
@@ -26,12 +26,17 @@ export default function BookListing(props) {
     })
   }
 
+  console.log(listing);
+  console.log(listing.user_id);
+  console.log(currUser !== props.user_id);
+
   const deleteHandler = async () => {
     try {
       // eslint-disable-next-line no-unused-vars
       const { data } = await axios.delete(`${baseUrl}/listings/${listing.id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
+      props.setDeletedListing(data)
     } catch (error) {
       console.log(error);
     }
@@ -49,8 +54,8 @@ export default function BookListing(props) {
             <p>{listing.type}</p>
           </div>
           <div >
-            {currUser && <button onClick={addToCartHandler}>Add To Cart</button>}
-            {currUser === listing.username && <button onClick={deleteHandler}>Delete</button>}
+            {currUser && currUser !== listing.user_id ? <button onClick={addToCartHandler}>Add To Cart</button> : <p></p>}
+            {isCreator(listing.user_id) && <button onClick={deleteHandler}>Delete</button>}
           </div>
         </div>
       </div>

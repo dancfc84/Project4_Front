@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom'
 import baseUrl from "../../config"
 
 
-export default function Login () {
+export default function Login() {
 
   const navigate = useNavigate()
+
 
   const [formData, setFormData] = useState({
     email: "",

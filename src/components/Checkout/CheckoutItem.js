@@ -6,8 +6,6 @@ const CheckoutItem = (props) => {
 
   const cartCtx = useContext(CartContext)
 
-  console.log(props);
-
   const removeFromCartHandler = (id) => {
     cartCtx.removeItem(id)
   }

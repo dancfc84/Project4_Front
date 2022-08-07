@@ -1,18 +1,27 @@
 
-import { getLoggedInUserId } from "../../lib/auth.js";
-
+// eslint-disable-next-line no-unused-vars
+import { getLoggedInUserId, isCreator } from "../../lib/auth.js";
+import axios from "axios";
+import baseUrl from "../../config.js";
 
 export default function BookComment(props) {
 
   console.log(props);
 
-  const currUser = getLoggedInUserId();
   const commentId = props.comment.id
 
+  async function handleCommentDelete () {
+    console.log(commentId);
+    try {
+      const { data } = await axios.delete(`${baseUrl}/comments/${commentId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
+      props.setDeletedComment(data)
 
-  async function handleCommentDeleteClick () {
-    props.handleCommentDelete(commentId)
-  }
+    } catch (error) {
+      console.log(error);
+    }
+  } 
 
 
   return (
@@ -20,12 +29,12 @@ export default function BookComment(props) {
       <div key={commentId}>
         <div>
           <div >
-            <p><strong>Username</strong> posted on
-              {props.comment.createdAt}</p>
+            <p><strong>Username</strong> posted on 
+              {props.comment.created_at}</p>
             <p>{props.comment.content}</p>
           </div>
           <div >
-            {currUser && <button onClick={handleCommentDeleteClick}>Delete</button>}
+            {isCreator(props.comment.user_id) && <button onClick={handleCommentDelete}>Delete</button>}
           </div>
         </div>
       </div>

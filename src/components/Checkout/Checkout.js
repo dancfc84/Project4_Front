@@ -17,8 +17,8 @@ export default function Checkout () {
   const [ updatedUser, setUpdatedUser ] = useState()
 
   // eslint-disable-next-line no-unused-vars
-  const booksTotalCost = cartCtx.items.length
-
+  const booksTotal = cartCtx.items.length
+  console.log(booksTotal);
 
   useEffect(() => {
     const getData = async () => {
@@ -38,13 +38,13 @@ export default function Checkout () {
 
   useEffect(() => {
     const getData = async () => {
-      console.log("coming this way");
       if (updatedUser !== undefined)
+
         try {
           const { data } = await axios.put(`${baseUrl}/users/${getLoggedInUserId()}`, updatedUser, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
           })
-          setUpdatedUser(data)
+          console.log(data);
           clearCartListings()
         } catch (error) {
           console.log(error);
@@ -56,8 +56,9 @@ export default function Checkout () {
 
   const buyBooksHandler =  () => {
 
-    if (user.credits >= booksTotalCost) {
-      const newUserBalance = user.credits - booksTotalCost
+    if (user.credits >= booksTotal) {
+      const newUserBalance = user.credits - booksTotal
+      console.log(user);
 
       setUpdatedUser({
         ...user,
@@ -69,7 +70,6 @@ export default function Checkout () {
   }
 
   const clearCartListings = async () => {
-    console.log("function runs");
     for (const id in cartCtx.items) {
       try {
         const { data } = await axios.delete(`${baseUrl}/listings/${cartCtx.items[id].id}`, {
@@ -87,14 +87,13 @@ export default function Checkout () {
     navigate('/books')
   }
 
-  console.log(cartCtx.items);
 
   return (
     <>
       <section>
         <h2>Checkout</h2>
         <div>
-          {cartCtx.items.map((item) => {
+          {booksTotal > 0 ? cartCtx.items.map((item) => {
             return (
               <CheckoutItem
                 key={item.id}
@@ -103,7 +102,7 @@ export default function Checkout () {
                 condition={item.condition}
                 type={item.type}
               />)
-          })}
+          }) : <p>Your cart is empty</p>}
         </div>
         <div>
           <button onClick={buyBooksHandler}>Buy Books</button>

@@ -34,6 +34,8 @@ export default function Login () {
     try {
       // eslint-disable-next-line no-unused-vars
       const { data } = await axios.post(`${baseUrl}/register`, formData)
+      localStorage.setItem("token", data.token)
+      localStorage.setItem("loggedIn", true)
       navigate('/books')
     } catch {
       console.log("issues");
@@ -144,7 +146,7 @@ export default function Login () {
             <div>
               <input
                 type="text"
-                name={"address2"}
+                name={"postcode"}
                 value={formData.postcode}
                 onChange={handleFormChange}
                 placeholder="Postcode"

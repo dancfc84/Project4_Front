@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 import BookComment from "./BookComment"
@@ -5,7 +6,7 @@ import BookListing from "../Listings/BookListing"
 import ListModal from "../Listings/ListModal"
 import axios from "axios"
 import baseUrl from "../../config"
-import { getLoggedInUserId } from "../../lib/auth"
+import { getLoggedInUserId, isCreator } from "../../lib/auth"
 
 
 export default function ShowBook() {
@@ -15,6 +16,12 @@ export default function ShowBook() {
   const [book, setBook] = useState([])
   const [comments, setComments] = useState([])
   const [listings, setListings] = useState([])
+
+  const [deletedListing, setDeletedListing] = useState([])
+  const [createdListing, setCreatedListing] = useState([])
+  const [deletedComment, setDeletedComment] = useState([])
+  const [createdComment, setCreatedComment] = useState([])
+
   const [formDataInput, setFormDataInput] = useState({
     content: "",
   })
@@ -42,6 +49,8 @@ export default function ShowBook() {
     getData()
   }, [bookId])
 
+  console.log(book);
+
   // get comments for the specific book
 
   useEffect(() => {
@@ -56,7 +65,7 @@ export default function ShowBook() {
       }
     }
     getData()
-  }, [bookId])
+  }, [ deletedComment, createdComment])
 
   // get listings for the book
 
@@ -72,10 +81,8 @@ export default function ShowBook() {
       }
     }
     getData()
-  }, [bookId])
+  }, [bookId, deletedListing, createdListing])
 
-
-  console.log(listings);
   
   async function handleDelete () {
     console.log(bookId);
@@ -84,6 +91,10 @@ export default function ShowBook() {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       console.log(data);
+      setFormDataInput({
+        content: "",
+      })
+      navigate(`/books`)
     } catch (error) {
       console.log(error);
     }
@@ -102,28 +113,18 @@ export default function ShowBook() {
     navigate(`/books/edit/${bookId}`)
   }
 
-  async function handleCommentPost () {
+  async function handleCommentPost (e) {
+    e.preventDefault()
     try {
       const { data } = await axios.post(`${baseUrl}/books/${bookId}/comments`, formDataInput, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
-      console.log(data);
-      
+      setCreatedComment(data)
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function handleCommentDelete (commentId) {
-    try {
-      const { data } = await axios.delete(`${baseUrl}/comments/${commentId}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-  } 
 
   // Modal Functions
 
@@ -135,7 +136,8 @@ export default function ShowBook() {
     setShowListingModal(true)
   }
 
-  console.log(formDataInput);
+  console.log(deletedComment);
+
 
   return (
     <>
@@ -151,8 +153,8 @@ export default function ShowBook() {
                     <img src={book.image} alt={book.name} />
                   </figure>
                   <div>
-                    <button onClick={handleDelete}>Delete</button>
-                    <button onClick={handleEdit}>Edit Book</button>
+                    {isCreator(book.user_id) && <button onClick={handleDelete}>Delete</button>}
+                    {isCreator(book.user_id) && <button onClick={handleEdit}>Edit Book</button>}
                     <button onClick={showModalHandler}>Sell Book</button>
                   </div>
                 </div>
@@ -201,18 +203,19 @@ export default function ShowBook() {
                 key={comment._id}
                 comment={comment}
                 bookId={bookId}
-                handleCommentDelete={handleCommentDelete}
+                setDeletedComment={setDeletedComment}
               />
             );
           })}
         </article>
         <article>
-          <h2><strong>This book is offered by</strong></h2>
+          {listings.length === 0 ? <p></p> : <h2><strong>This book is offered by</strong></h2>}
           {currUser && listings.map((listing) => {
             return (
               <BookListing
                 key={listing.id}
                 listing={listing}
+                setDeletedListing={setDeletedListing}
               />
             );
           })}
@@ -221,6 +224,7 @@ export default function ShowBook() {
           showListingModal && <ListModal
             bookId={bookId}
             hideModalHandler={hideModalHandler}
+            setCreatedListing={setCreatedListing}
           />
         }
       </section>
