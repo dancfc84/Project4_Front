@@ -18,7 +18,8 @@ export default function Checkout () {
 
   // eslint-disable-next-line no-unused-vars
   const booksTotal = cartCtx.items.length
-  console.log(booksTotal);
+
+  console.log(user);
 
   useEffect(() => {
     const getData = async () => {
@@ -38,9 +39,11 @@ export default function Checkout () {
 
   useEffect(() => {
     const getData = async () => {
+      console.log("this way");
       if (updatedUser !== undefined)
 
         try {
+          delete updatedUser["password"]
           const { data } = await axios.put(`${baseUrl}/users/${getLoggedInUserId()}`, updatedUser, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
           })
@@ -58,8 +61,6 @@ export default function Checkout () {
 
     if (user.credits >= booksTotal) {
       const newUserBalance = user.credits - booksTotal
-      console.log(user);
-
       setUpdatedUser({
         ...user,
         credits: newUserBalance,
@@ -80,11 +81,9 @@ export default function Checkout () {
         console.log(error);
       }
     }
-
-    console.log("make it empty");
     localStorage.removeItem('cart')
     cartCtx.items = []
-    navigate('/books')
+    navigate('/purchase')
   }
 
 

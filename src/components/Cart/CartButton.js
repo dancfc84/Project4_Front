@@ -16,7 +16,6 @@ export default function CartButton (props) {
       <span className={classes.icon} >
         <CartIcon />
       </span>
-      <span>Your Cart</span>
       <span className={classes.badge} >{numCartItems}</span>
     </button>
   </>

@@ -1,0 +1,193 @@
+
+
+
+body {
+  font-family: 'Lato', sans-serif;
+}
+
+.book_section {
+  padding: 20px 20px;
+}
+
+.book_info_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book_title {
+  font-size: 2.5rem;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  margin-bottom: 10px;
+}
+
+.left_col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.right_col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.right_col h4 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.right_col p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+figure {
+  margin-bottom: 5px;
+}
+
+.del_button{
+  appearance: none;
+  background-color: #D2122E;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  margin: 5px;
+}
+
+
+.edit_button{
+  appearance: none;
+  background-color: #FB8500;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  margin: 5px;
+}
+
+
+.sell_button{
+  appearance: none;
+  background-color: #8ECAE6;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  margin: 5px;
+}
+
+.comment_listing_section{
+  padding: 0px 20px;
+}
+
+.comment_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  height: 200px;
+}
+
+.comment_input {
+  width: 80%;
+  height: 100px;
+  padding: 10px;
+  background-color: #8ECAE6;
+  font: 1.4em/1.6em;
+}
+
+.comment_article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.comment_article button {
+    margin-top: 10px;
+    background-color: #FB8500;
+    appearance: none;
+    border: 1px solid rgba(27, 31, 35, .15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+    margin: 5px;
+}
+
+
+.listing_article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#book_offer_title{
+  text-align: center;
+}

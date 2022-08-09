@@ -3,6 +3,9 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import baseUrl from "../../config"
 import Book from "./Book"
+import classes from './bookindex.module.css'
+
+
 
 export default function BookIndex() {
 
@@ -36,16 +39,16 @@ export default function BookIndex() {
   console.log(books);
 
   return (
-    <section >
-      <div>
-        <input
+    <section className={classes.index_section}>
+      <div className={classes.search_container}>
+        <input className={classes.searchbox}
           value={search}
-          placeholder={"SEARCH books"}
+          placeholder={"Search books"}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
-      <div>
+      <div className={classes.card_container}>
         {books ? filterBooks().map((book, i) => {
           return <Book
             key={i}

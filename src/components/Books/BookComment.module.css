@@ -1,0 +1,21 @@
+.bookcomment {
+  background-color: #8ECAE6;
+	position: relative;
+	padding: 20px;
+	color: white;
+}
+
+.bookcomment::after{
+	content: "";
+	position: absolute;
+	height: 25px;
+	width: 25px;
+	bottom: -25px;
+	left: 90%;
+	background-color: #8ECAE6;
+	clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+.bookcomment_container {
+  margin-bottom: 20px ;
+}

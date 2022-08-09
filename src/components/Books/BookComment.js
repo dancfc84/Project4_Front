@@ -3,6 +3,8 @@
 import { getLoggedInUserId, isCreator } from "../../lib/auth.js";
 import axios from "axios";
 import baseUrl from "../../config.js";
+import classes from './BookComment.module.css'
+import 'bulma'
 
 export default function BookComment(props) {
 
@@ -27,11 +29,15 @@ export default function BookComment(props) {
   return (
     <>
       <div key={commentId}>
-        <div>
-          <div >
-            <p><strong>Username</strong> posted on 
-              {props.comment.created_at}</p>
-            <p>{props.comment.content}</p>
+        <div className={`media-content ${classes.bookcomment_container}`}>
+          <div className={` content ${classes.bookcomment}`}>
+            <p>
+              <strong>{props.comment.username}</strong> posted on 
+              {` ${props.comment.created_at}`}
+            </p>
+            <p>
+              {props.comment.content}
+            </p>
           </div>
           <div >
             {isCreator(props.comment.user_id) && <button onClick={handleCommentDelete}>Delete</button>}

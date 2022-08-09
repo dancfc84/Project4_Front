@@ -1,0 +1,40 @@
+
+.index_section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
+.card_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.searchbox{
+  padding: 5px;
+  border: 2px solid #eee;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.searchbox:focus{
+  outline: none !important;
+  border:1px solid #bde0fe;
+  box-shadow: 0 0 10px #719ECE;
+}
+
+.search_container {
+  margin: 20px;
+}
+
+@media screen and (min-width: 800px) {
+  
+    .searchbox{
+      width: 200px;
+      height:35px;
+    }
+  }
+  

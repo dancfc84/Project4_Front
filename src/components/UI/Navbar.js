@@ -1,6 +1,7 @@
 import { NavLink, useLocation } from "react-router-dom"
 import React, { useEffect } from "react"
 import CartButton from "../Cart/CartButton"
+import styles from "./navbar.module.css"
 
 
 
@@ -26,38 +27,40 @@ export default function Navbar(props) {
 
   return (
     <>
-      <header>
-        <nav>
-          <div>
+      <nav className={`${styles.header}`}>
+        <div className={`${styles.logo}`}>
+          <h1>BOOK EXCHANGE</h1>
+        </div>
+        <div className={`${styles.links}`}>
+          <NavLink to="/">
+            Home
+          </NavLink>
+          <NavLink to="/books">
+            Books
+          </NavLink>
+          <NavLink id={styles.createlink} to="/books/create">
+            Create Book
+          </NavLink>
+          { isLoggedIn && <NavLink id={styles.profilelink} to="/profile">
+            Profile
+          </NavLink>}
+          <NavLink to="/contact">
+            Contact
+          </NavLink>
 
-            <NavLink to="/">
-              Home
-            </NavLink>
-            <NavLink to="/books">
-              Books
-            </NavLink>
-            <NavLink to="/books/create">
-              Create Book
-            </NavLink>
-            { isLoggedIn && <NavLink to="/profile">
-              Profile
-            </NavLink>}
-            <NavLink to="/contact">
-              Contact
-            </NavLink>
+          { isLoggedIn && <NavLink onClick={navbarLogout} to="/logout">
+            Logout
+          </NavLink>} 
+          { !isLoggedIn && <NavLink to="/login">
+            Login
+          </NavLink> }
+        </div>
 
-            { isLoggedIn && <NavLink onClick={navbarLogout} to="/logout">
-              Logout
-            </NavLink>} 
-            { !isLoggedIn && <NavLink to="/login">
-              Login
-            </NavLink> }
+        <div className={`${styles.cart_button}`}>
+          <CartButton onClick={props.onShowCart} />
+        </div>
 
-            <CartButton onClick={props.onShowCart} />
-
-          </div>
-        </nav>
-      </header>
+      </nav>
     </>
   )
 }

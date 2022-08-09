@@ -16,6 +16,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import CartProvider from "./store/CartProvider"
 import Checkout from "./components/Checkout/Checkout"
 import Contact from "./components/Other/Contact"
+import CheckoutPurchase from './components/Checkout/CheckoutPurchase'
 
 
 
@@ -54,6 +55,7 @@ function App() {
           <Route path="/logout" element={<Logout />}/>
           <Route path="/register" element={<Register />}/>
           <Route path="/checkout" element={<Checkout />}/>
+          <Route path="/purchase" element={<CheckoutPurchase />}/>
           <Route path="/contact" element={<Contact />}/>
         </Routes>
       </Router>

@@ -4,6 +4,7 @@ import baseUrl from "../../config";
 import axios from "axios";
 import { isCreator } from "../../lib/auth.js";
 import { getLoggedInUserId } from "../../lib/auth.js";
+import classes from "./BookListing.module.css"
 
 
 export default function BookListing(props) {
@@ -12,23 +13,22 @@ export default function BookListing(props) {
 
   const listing = props.listing;
 
-
   const currUser = getLoggedInUserId();
+
+  console.log(listing);
 
   //Whenever add to cart button is pressed, the cart context 
   const addToCartHandler = () => {
-    cartCtx.addItem({
-      id: listing.id,
-      name: listing.name,
-      condition: listing.condition,
-      type: listing.type,
-      user: listing.username,
-    })
+    currUser ?
+      cartCtx.addItem({
+        id: listing.id,
+        name: listing.name,
+        condition: listing.condition,
+        type: listing.type,
+        user: listing.username,
+      }) : props.setLoginRegisterModal(true)
   }
 
-  console.log(listing);
-  console.log(listing.user_id);
-  console.log(currUser !== props.user_id);
 
   const deleteHandler = async () => {
     try {
@@ -42,19 +42,19 @@ export default function BookListing(props) {
     }
   }
   
-
+  console.log(currUser);
 
   return (
     <>
       <div key={listing.id}>
-        <div>
-          <div >
+        <div className={`${classes.listing_container}`}>
+          <div className={`${classes.listing}`} >
             <p>{listing.username}</p>
             <p>{listing.condition}</p>
             <p>{listing.type}</p>
           </div>
           <div >
-            {currUser && currUser !== listing.user_id ? <button onClick={addToCartHandler}>Add To Cart</button> : <p></p>}
+            {currUser !== listing.user_id ? <button onClick={addToCartHandler}>Add To Cart</button> : <p></p>}
             {isCreator(listing.user_id) && <button onClick={deleteHandler}>Delete</button>}
           </div>
         </div>
