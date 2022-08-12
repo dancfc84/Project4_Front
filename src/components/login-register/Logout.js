@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
+import styles from './Logout.module.css'
 
 export default function Logout() {
   const delayInMilliseconds = 1000; //1 second
@@ -12,10 +14,11 @@ export default function Logout() {
 
   }, [])
 
+
   return (
     <>
-      <div>
-        <p>You have been successfully logged out, redirecting...</p>
+      <div className={styles.text_container}>
+        <p className={styles.logout_text}>You have been successfully logged out, redirecting...</p>
       </div>
     </>
   )

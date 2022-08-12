@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Modal from "../UI/Modal";
 import axios from "axios";
 import baseUrl from "../../config"
-
+import classes from "./ListModal.module.css"
 
 
 const LoginModal = (props) => {
@@ -70,11 +70,13 @@ const LoginModal = (props) => {
 
     <Modal hideModalHandler={props.hideModalHandler}>
       <div className="container column box">
-        <div className="title is-2">Sell Book</div>
+        <div >
+          <h2 className={classes.text_header}>Sell Book</h2>
+        </div>
         <hr />
         <form onSubmit={handleListingConfirm}>
           <div>
-            <label className="label">Book Type</label>
+            <label className={`${classes.list_label}`}>Book Type</label>
             <select onChange={handleTypeChange}>
               {typeOptions.map(option => (
                 <option key={option.value} value={option.value}>
@@ -85,7 +87,7 @@ const LoginModal = (props) => {
           </div>
 
           <div>
-            <label className="label">Book Condition</label>
+            <label className={`${classes.list_label}`}>Book Condition</label>
             <select onChange={handleConditionChange}>
               {conditionOptions.map(option => (
                 <option key={option.value} value={option.value}>
@@ -95,18 +97,18 @@ const LoginModal = (props) => {
             </select>
           </div>
 
-          <div className="field container">
+          <div className={`${classes.button_container} field container`}>
             <div className="control">
               <button
                 type="button"
-                className="button is-primary mx-5 my-5"
+                className={classes.sell_book_button}
                 onClick={handleListingConfirm}
               >
                 Sell Book
               </button>
               <button
                 type="button"
-                className="button is-warning is-light my-5 mx-5 is-outlined"
+                className={classes.cancel_button}
                 onClick={props.hideModalHandler}
               >
                 Cancel

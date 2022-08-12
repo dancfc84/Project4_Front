@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import baseUrl from "../../config"
+import styles from './CreateAuthor.module.css'
 
 export default function CreateAuthor () {
 
@@ -38,34 +39,38 @@ export default function CreateAuthor () {
   return (
     <section>
       <div>
-        <h2>Create Author</h2>
-        <form onSubmit={handleFormSubmit}>
-          <div>
-            <label>First Name</label>
-          </div>
-          <div>
-            <input
-              type="text"
-              name={'first_name'}
-              value={formData.first_name}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label>Last Name</label>
-          </div>
-          <div>
-            <input
-              type="text"
-              name={'last_name'}
-              value={formData.last_name}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <button>Create Author</button>
-          </div>
-        </form>
+        <div className={styles.text_header}>
+          <h2 className={styles.text_header}>Create Author</h2>
+        </div>
+        <div className={styles.form_container}>
+          <form className={styles.form} onSubmit={handleFormSubmit}>
+            <div className={styles.form_fields}>
+              <label>First Name</label>
+            </div>
+            <div>
+              <input
+                type="text"
+                name={'first_name'}
+                value={formData.first_name}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.form_fields}>
+              <label>Last Name</label>
+            </div>
+            <div>
+              <input
+                type="text"
+                name={'last_name'}
+                value={formData.last_name}
+                onChange={handleChange}
+              />
+            </div>
+            <div className={styles.button_container}>
+              <button className={styles.submit_button}>Create Author</button>
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   )

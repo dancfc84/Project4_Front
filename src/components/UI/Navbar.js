@@ -1,14 +1,18 @@
 import { NavLink, useLocation } from "react-router-dom"
-import React, { useEffect } from "react"
+import React, { useEffect, useContext } from "react"
 import CartButton from "../Cart/CartButton"
 import styles from "./navbar.module.css"
-
+import CartContext from "../../store/cart-context"
 
 
 export default function Navbar(props) {
 
   //This notes down everytime there is a change in the url, very handy for when you want to re-render a component, when change is not in same compnent
   const location = useLocation()
+
+  const cartCtx = useContext(CartContext)
+
+  console.log(cartCtx.items);
 
   const [isLoggedIn, setIsLoggedIn] = React.useState(Boolean(localStorage.getItem("loggedIn")))
 
@@ -19,7 +23,18 @@ export default function Navbar(props) {
     setIsLoggedIn(Boolean(localStorage.getItem("loggedIn")))
   }, [location])
 
+  const clearCartListings = async () => {
+    for (const id in cartCtx.items) {
+      try {
+        cartCtx.removeItem(cartCtx.items[id].id)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
   function navbarLogout() {
+    clearCartListings()
     window.localStorage.clear()
     setIsLoggedIn(false)
   }

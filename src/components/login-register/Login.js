@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom'
 import baseUrl from "../../config"
+import styles from "./Login.module.css"
 
 
 export default function Login() {
@@ -44,53 +45,56 @@ export default function Login() {
   return <>
     <section>
       <div>
-        <h2>Sign In</h2>
-        <form onSubmit={handleLogin}>
-          <div>
-            <label>Email</label>
-            <div>
-              <input
-                type="text"
-                name={"email"}
-                value={formData.email}
-                onChange={handleFormChange}
-                placeholder="Email"
-              />
+        <div className={styles.text_header}>
+          <h2>Sign In</h2>
+        </div>
+        <div className={styles.form_container}>
+          <form className={styles.form} onSubmit={handleLogin}>
+            <div className={styles.form_fields}>
+              <label>Email</label>
+              <div>
+                <input
+                  type="text"
+                  name={"email"}
+                  value={formData.email}
+                  onChange={handleFormChange}
+                  placeholder="Email"
+                />
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label>Password</label>
-            <div>
-              <input
-                type="password"
-                name={"password"}
-                value={formData.password}
-                onChange={handleFormChange}
-                placeholder="Password"
-              />{" "}
+            <div className={styles.form_fields}>
+              <label>Password</label>
+              <div>
+                <input
+                  type="password"
+                  name={"password"}
+                  value={formData.password}
+                  onChange={handleFormChange}
+                  placeholder="Password"
+                />{" "}
+              </div>
             </div>
-          </div>
 
-          <div >
-            <div >
+            <div className={styles.button_container}>
               <button
+                className={styles.submit_button}
                 type="button"
                 onClick={handleLogin}
               >
                 Login
               </button>
+              <button
+                className={styles.create_button}
+                type="button"
+                onClick={createAccountHandler}
+              >
+                Create account
+              </button>
             </div>
-          </div>
-        </form>
-        <div>
-          <button
-            type="button"
-            onClick={createAccountHandler}
-          >
-            Create an account
-          </button>
+          </form>
         </div>
+
       </div>
     </section>
   </>

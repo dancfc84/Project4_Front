@@ -1,0 +1,26 @@
+.footer_text_class {
+  text-align: center;
+}
+
+.footer_text_class h4 {
+  color: #023047;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.footer_text_class p {
+  color: #219EBC;
+  font-size: 1rem;
+}
+
+.copyright_text{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: #023047;
+}
+
+a:visited {
+  color: #023047;
+}

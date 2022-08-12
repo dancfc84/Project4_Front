@@ -8,25 +8,16 @@
   background-color: rgba(0, 0, 0, 0.75);
 }
 
-.modal {
+/* .modal {
   position: fixed;
   top: 20vh;
-  left: 5%;
+  left: 35%;
+  max-width: 500px;
   width: 90%;
-  background-color: white;
   padding: 1rem;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  z-index: 30;
-  animation: slide-down 300ms ease-out forwards;
-}
+} */
 
-@media (min-width: 768px) {
-  .modal {
-    width: 30rem;
-    left: calc(50% - 20rem);
-  }
-}
+
 
 @keyframes slide-down {
   from {
@@ -36,5 +27,112 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+
+
+.modal {
+  position: fixed;
+  top: 20vh;
+  left: 5%;
+  max-width: 700px;
+  width: 90%;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 30;
+  animation: slide-down 300ms ease-out forwards;
+}
+
+
+
+
+
+@media screen and (min-width: 750px) {
+  .modal{
+    left: 9%;
+  }
+}
+
+@media screen and (min-width: 850px) {
+  .modal{
+    left: 12%;
+  }
+}
+
+@media screen and (min-width: 950px) {
+  .modal{
+    left: 16%;
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  .modal{
+    left: 19%;
+  }
+}
+
+@media screen and (min-width: 1150px) {
+  .modal{
+    left: 22%;
+  }
+}
+
+@media screen and (min-width: 1250px) {
+  .modal{
+    left: 25%;
+  }
+}
+
+
+@media screen and (min-width: 1350px) {
+  .modal{
+    left: 27%;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .modal{
+    left: 29%;
+  }
+}
+
+@media screen and (min-width: 1700px) {
+  .modal{
+    left: 31%;
+  }
+}
+
+@media screen and (min-width: 1900px) {
+  .modal{
+    left: 33%;
+  }
+}
+
+@media screen and (min-width: 2100px) {
+  .modal{
+    left: 35%;
+  }
+}
+
+@media screen and (min-width: 2300px) {
+  .modal{
+    left: 37%;
+  }
+}
+
+
+@media screen and (min-width: 2500px) {
+  .modal{
+    left: 39%;
+  }
+}
+
+
+@media screen and (min-width: 2700px) {
+  .modal{
+    left: 41%;
   }
 }

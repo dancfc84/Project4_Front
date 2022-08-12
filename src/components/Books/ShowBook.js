@@ -121,9 +121,10 @@ export default function ShowBook() {
       const { data } = await axios.post(`${baseUrl}/books/${bookId}/comments`, formDataInput, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
+      console.log(data);
       setCreatedComment(data)
       setFormDataInput({
-        comment: "",
+        content: "",
       })
     } catch (error) {
       console.log(error);
@@ -145,95 +146,94 @@ export default function ShowBook() {
 
   return (
     <>
-      {book ? <div><section className={`section ${classes.book_section}`}>
-        <div className={`container ${classes.book_info_container}`}>
-          <h2 className={classes.book_title}>{book[0].name}</h2>
-          <div className='columns' >
-            <div className={`column is-half ${classes.left_col}`}>
-              <figure >
-                <img src={book[0].image} alt={book[0].name} />
-              </figure>
-              <div className={classes.admin_buttons_container}>
-                {isCreator(book[0].user_id) && <button className={classes.del_button} onClick={handleDelete}>Delete</button>}
-                {isCreator(book[0].user_id) && <button className={classes.edit_button} onClick={handleEdit}>Edit Book</button>}
-                <button className={classes.sell_button} onClick={showModalHandler}>Sell Book</button>
+      {book ?
+        <div className={`section ${classes.main_container}`}>
+          <section className={`section ${classes.book_section}`}>
+            <h2 className={classes.book_title}>{book[0].name}</h2>
+            <div className={`${classes.book_container}`}>
+              <div className={`column is-half ${classes.left_col}`}>
+                <figure >
+                  <img src={book[0].image} alt={book[0].name} />
+                </figure>
+                <div className={`${classes.admin_buttons_container}`}>
+                  {isCreator(book[0].user_id) && <button className={classes.del_button} onClick={handleDelete}>Delete</button>}
+                  {isCreator(book[0].user_id) && <button className={classes.edit_button} onClick={handleEdit}>Edit Book</button>}
+                  <button className={classes.sell_button} onClick={showModalHandler}>Sell Book</button>
+                </div>
+              </div>
+              <div className={`column is-half ${classes.right_col}`}>
+                <h4>Year Released</h4>
+                <p>{book[0].year_released}</p>
+                <h4>Pages</h4>
+                <p>{book[0].pages}</p>
+                <h4>Author</h4>
+                <p>{`${book[0].first_name} ${book[0].last_name}`}</p>
+                <h4 id={`${classes.book_description_text}`}>Book Description</h4>
+                <p id={`${classes.book_description_text}`}>{book[0].description}</p>
               </div>
             </div>
-            <div className={`column is-half ${classes.right_col}`}>
-              <h4>Year Released</h4>
-              <p>{book[0].year_released}</p>
-              <h4>Pages</h4>
-              <p>{book[0].pages}</p>
-              <h4>Author</h4>
-              <p>{`${book[0].first_name} ${book[0].last_name}`}</p>
-              <h4>Book Description</h4>
-              <p>{book[0].description}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className={`section ${classes.comment_listing_section}`}>
-        <div className='columns'>
-          <article className={`column is-half ${classes.comment_article}`}>
-            {currUser && 
-            <div>
-              <form onSubmit={handleCommentPost}>
-                <div className={`${classes.comment_container}`}>
-                  <textarea
-                    type="text"
-                    name={"content"}
-                    value={formDataInput.content}
-                    onChange={handleChangeEvent}
-                    placeholder="Type Comment Here"
-                    className={`${classes.comment_input}`}
-                  /> 
-                  <button>
-                    Comment
-                  </button>
+          </section>
+          <section className={`section ${classes.comment_listing_section}`}>
+            <div className={`${classes.comment_listing_container}`}>
+              <article className={`column is-half ${classes.comment_article}`}>
+                {currUser && <div>
+                  <form onSubmit={handleCommentPost}>
+                    <div className={`${classes.comment_container}`}>
+                      <textarea
+                        type="text"
+                        name={"content"}
+                        value={formDataInput.content}
+                        onChange={handleChangeEvent}
+                        placeholder="Type Comment Here"
+                        className={`${classes.comment_input}`}
+                      /> 
+                      <button>
+                        Comment
+                      </button>
+                    </div>
+                  </form>
+                </div> }
+                {currUser && comments.map((comment) => {
+                  return (
+                    <BookComment
+                      key={comment._id}
+                      comment={comment}
+                      bookId={bookId}
+                      setDeletedComment={setDeletedComment}
+                    />
+                  );
+                })}
+              </article>
+              <article className={`column is-half`}>
+                <div >
+                  {listings.length === 0 ? <p></p> : <h2 id={`${classes.book_offer_title}`}><strong>This book is offered by</strong></h2>}
+                  {listings.map((listing) => {
+                    return (
+                      <BookListing
+                        key={listing.id}
+                        listing={listing}
+                        setDeletedListing={setDeletedListing}
+                        setLoginRegisterModal={setShowLoginRegisterModal}
+                      />
+                    );
+                  })}
                 </div>
-              </form>
-            </div> }
-            {currUser && comments.map((comment) => {
-              return (
-                <BookComment
-                  key={comment._id}
-                  comment={comment}
-                  bookId={bookId}
-                  setDeletedComment={setDeletedComment}
-                />
-              );
-            })}
-          </article>
-          <article className={`column is-half`}>
-            <div >
-              {listings.length === 0 ? <p></p> : <h2 id={`${classes.book_offer_title}`}><strong>This book is offered by</strong></h2>}
-              {listings.map((listing) => {
-                return (
-                  <BookListing
-                    key={listing.id}
-                    listing={listing}
-                    setDeletedListing={setDeletedListing}
-                    setLoginRegisterModal={setShowLoginRegisterModal}
-                  />
-                );
-              })}
+              </article>
             </div>
-          </article>
-        </div>
-        {
-          showListingModal && <ListModal
-            bookId={bookId}
-            hideModalHandler={hideModalHandler}
-            setCreatedListing={setCreatedListing}
-          />
-        }
-        {
-          showLoginRegisterModal && <LoginRegisterModal
-            setLoginRegisterModal={setShowLoginRegisterModal}
-          />
-        }
-      </section>
-      </div> : <p>Book loading</p>}
+            {
+              showListingModal && <ListModal
+                bookId={bookId}
+                hideModalHandler={hideModalHandler}
+                setCreatedListing={setCreatedListing}
+              />
+            }
+            {
+              showLoginRegisterModal && <LoginRegisterModal
+                setLoginRegisterModal={setShowLoginRegisterModal}
+              />
+            }
+          </section>
+        </div> : <p>Book loading</p>}
     </>
   )
 }

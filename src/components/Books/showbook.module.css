@@ -3,13 +3,19 @@
 
 body {
   font-family: 'Lato', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.book_section {
-  padding: 20px 20px;
-}
 
 .book_info_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.book_container{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,6 +52,11 @@ body {
 
 figure {
   margin-bottom: 5px;
+}
+
+.admin_buttons_container{
+  display: flex;
+  justify-content: center;
 }
 
 .del_button{
@@ -104,7 +115,7 @@ figure {
 
 .sell_button{
   appearance: none;
-  background-color: #8ECAE6;
+  background-color: #FFB703;
   border: 1px solid rgba(27, 31, 35, .15);
   border-radius: 6px;
   box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
@@ -130,6 +141,8 @@ figure {
 
 .comment_listing_section{
   padding: 0px 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .comment_container {
@@ -190,4 +203,49 @@ figure {
 
 #book_offer_title{
   text-align: center;
+}
+
+.main_container{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.comment_listing_container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+@media screen and (min-width: 800px) {
+
+  .book_container{
+    flex-direction:row;
+    align-items: center;
+  }
+
+  .book_container h4{
+    font-size: 1.1rem;
+  }
+
+  .book_container p{
+    font-size: 0.7rem;
+  }
+
+}
+
+@media screen and (min-width: 1000px) {
+
+
+
+  .book_container h4{
+    font-size: 1.2rem;
+  }
+
+  .book_container p{
+    font-size: 0.9rem;
+  }
+
+
 }

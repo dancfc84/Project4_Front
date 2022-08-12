@@ -17,6 +17,8 @@ import CartProvider from "./store/CartProvider"
 import Checkout from "./components/Checkout/Checkout"
 import Contact from "./components/Other/Contact"
 import CheckoutPurchase from './components/Checkout/CheckoutPurchase'
+import Footer from "./components/UI/Footer"
+import Homepage from "./components/Homepage/Homepage"
 
 
 
@@ -44,6 +46,7 @@ function App() {
           onShowCart={showCartHandler} />
         {cartIsShown && <Cart onHideCart={hideCartHandler}/>}
         <Routes>
+          <Route path="/" element={<Homepage />} /> 
           <Route path="/books" element={<BookIndex />} />
           <Route path="/books/:bookId" element={<ShowBook />}/>
           <Route path="/books/create" element={<CreateBook />}/>
@@ -58,6 +61,7 @@ function App() {
           <Route path="/purchase" element={<CheckoutPurchase />}/>
           <Route path="/contact" element={<Contact />}/>
         </Routes>
+        <Footer/>
       </Router>
     </CartProvider>
   )

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from "axios"
 import baseUrl from "../../config"
 import { useNavigate } from 'react-router-dom'
+import styles from './Register.module.css'
 
 
 export default function Login () {
@@ -47,145 +48,147 @@ export default function Login () {
   return <>
     <section>
       <div>
-        <h2>Register</h2>
-        <form onSubmit={handleLogin}>
-          <div>
-            <label>First Name</label>
-            <div>
-              <input
-                type="text"
-                name={"first_name"}
-                value={formData.first_name}
-                onChange={handleFormChange}
-                placeholder="First Name"
-              />
+        <div className={styles.text_header}>
+          <h2>Register</h2>
+        </div>
+        <div className={styles.form_container}>
+          <form className={styles.form} onSubmit={handleLogin}>
+            <div className={styles.form_fields}>
+              <label>First Name</label>
+              <div>
+                <input
+                  type="text"
+                  name={"first_name"}
+                  value={formData.first_name}
+                  onChange={handleFormChange}
+                  placeholder="First Name"
+                />
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label>Last Name</label>
-            <div>
-              <input
-                type="text"
-                name={"last_name"}
-                value={formData.last_name}
-                onChange={handleFormChange}
-                placeholder="Last Name"
-              />
+            <div className={styles.form_fields}>
+              <label>Last Name</label>
+              <div>
+                <input
+                  type="text"
+                  name={"last_name"}
+                  value={formData.last_name}
+                  onChange={handleFormChange}
+                  placeholder="Last Name"
+                />
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label>Username</label>
-            <div>
-              <input
-                type="text"
-                name={"username"}
-                value={formData.username}
-                onChange={handleFormChange}
-                placeholder="Username"
-              />
+            <div className={styles.form_fields}>
+              <label>Username</label>
+              <div>
+                <input
+                  type="text"
+                  name={"username"}
+                  value={formData.username}
+                  onChange={handleFormChange}
+                  placeholder="Username"
+                />
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label>Email</label>
             <div>
-              <input
-                type="text"
-                name={"email"}
-                value={formData.email}
-                onChange={handleFormChange}
-                placeholder="Email"
-              />
+              <label>Email</label>
+              <div>
+                <input
+                  type="text"
+                  name={"email"}
+                  value={formData.email}
+                  onChange={handleFormChange}
+                  placeholder="Email"
+                />
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label>Password</label>
-            <div>
-              <input
-                type="password"
-                name={"password"}
-                value={formData.password}
-                onChange={handleFormChange}
-                placeholder="Password"
-              />{" "}
+            <div className={styles.form_fields}>
+              <label>Password</label>
+              <div>
+                <input
+                  type="password"
+                  name={"password"}
+                  value={formData.password}
+                  onChange={handleFormChange}
+                  placeholder="Password"
+                />{" "}
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label>Address 1</label>
-            <div>
-              <input
-                type="text"
-                name={"address1"}
-                value={formData.address1}
-                onChange={handleFormChange}
-                placeholder="Address"
-              />
+            <div className={styles.form_fields}>
+              <label>Address 1</label>
+              <div>
+                <input
+                  type="text"
+                  name={"address1"}
+                  value={formData.address1}
+                  onChange={handleFormChange}
+                  placeholder="Address"
+                />
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label>Address 2</label>
-            <div>
-              <input
-                type="text"
-                name={"address2"}
-                value={formData.address2}
-                onChange={handleFormChange}
-                placeholder="Address"
-              />
+            <div className={styles.form_fields}>
+              <label>Address 2</label>
+              <div>
+                <input
+                  type="text"
+                  name={"address2"}
+                  value={formData.address2}
+                  onChange={handleFormChange}
+                  placeholder="Address"
+                />
+              </div>
             </div>
-          </div>
 
 
-          <div>
-            <label>Postcode</label>
-            <div>
-              <input
-                type="text"
-                name={"postcode"}
-                value={formData.postcode}
-                onChange={handleFormChange}
-                placeholder="Postcode"
-              />
+            <div className={styles.form_fields}>
+              <label>Postcode</label>
+              <div>
+                <input
+                  type="text"
+                  name={"postcode"}
+                  value={formData.postcode}
+                  onChange={handleFormChange}
+                  placeholder="Postcode"
+                />
+              </div>
             </div>
-          </div>
 
-          <div>
-            <label>County</label>
-            <div>
-              <input
-                type="text"
-                name={"county"}
-                value={formData.county}
-                onChange={handleFormChange}
-                placeholder="County"
-              />
+            <div className={styles.form_fields}>
+              <label>County</label>
+              <div>
+                <input
+                  type="text"
+                  name={"county"}
+                  value={formData.county}
+                  onChange={handleFormChange}
+                  placeholder="County"
+                />
+              </div>
             </div>
-          </div>
 
-        
-          <div >
-            <div >
+          
+            <div className={styles.button_container}>
               <button
+                className={styles.submit_button}
                 type="button"
                 onClick={handleLogin}
               >
                 Register
               </button>
+              <button
+                className={styles.sign_in_button}
+                type="button"
+              >Sign In 
+              </button>
             </div>
-          </div>
-        </form>
-        <div>
-          <button
-            type="button"
-          >
-            Already have an Account - Sign In 
-          </button>
+          </form>
         </div>
+
 
       </div>
     </section>

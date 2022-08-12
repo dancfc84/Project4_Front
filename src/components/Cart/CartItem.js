@@ -3,9 +3,8 @@ import classes from './CartItem.module.css';
 const CartItem = (props) => {
 
   return (
-    <li className={classes['cart-item']}>
+    <li className={classes.cart_item}>
       <div>
-        <h2>{props.name}</h2>
         <div className={classes.summary}>
           <span className={classes.price}>{props.name}</span>
           <span className={classes.amount}>{props.condition}</span>
@@ -13,7 +12,7 @@ const CartItem = (props) => {
         </div>
       </div>
       <div className={classes.actions}>
-        <button onClick={props.onRemove}>Remove</button>
+        <button className={classes.remove_button} onClick={props.onRemove}>Remove</button>
       </div>
     </li>
   );

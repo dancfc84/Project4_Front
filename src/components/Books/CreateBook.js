@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import baseUrl from "../../config"
+import styles from "./CreateBook.module.css"
+
 
 export default function CreateJob () {
 
@@ -54,7 +56,6 @@ export default function CreateJob () {
     getData()
   }, [])
 
-  console.log(authors);
 
   async function handleSubmit(e) {
     try {
@@ -98,10 +99,12 @@ export default function CreateJob () {
 
   return <>
     { authors && genres ? <div >
-      <div >
-        <form onSubmit={handleSubmit}>
-
-          <div >
+      <div className={styles.text_header}>
+        <h2 className={styles.text_header}>Create Book</h2>
+      </div>
+      <div className={styles.form_container}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.form_fields}>
             <label >Name</label>
             <div>
               <input
@@ -112,8 +115,8 @@ export default function CreateJob () {
               />
             </div>
           </div>
-          <div>
-            <label className="label">Author</label>
+          <div className={styles.form_fields}>
+            <label >Author</label>
             <select onChange={handleAuthorChange}>
               {authors.map(option => (
                 <option key={option.id} value={option.id}>
@@ -121,10 +124,10 @@ export default function CreateJob () {
                 </option>
               ))}
             </select>
-            <p>If the author is not in list, please create <a href='/authors/create'>here</a></p>
+            <p id={`${styles.author_link}`}>If the author is not in list, please create <a href='/authors/create'>here</a></p>
           </div>
-          <div>
-            <label className="label">Genre</label>
+          <div className={styles.form_fields}>
+            <label >Genre</label>
             <select onChange={handleGenreChange}>
               {genres.map(option => (
                 <option key={option.id} value={option.id}>
@@ -133,7 +136,7 @@ export default function CreateJob () {
               ))}
             </select>
           </div>
-          <div>
+          <div className={styles.form_fields}>
             <label >Year Released</label>
             <div >
               <input
@@ -145,7 +148,7 @@ export default function CreateJob () {
 
             </div>
           </div>
-          <div >
+          <div className={styles.form_fields}>
             <label >How many pages</label>
             <div >
               <input
@@ -156,7 +159,7 @@ export default function CreateJob () {
               />
             </div>
           </div>
-          <div >
+          <div className={styles.form_fields}>
             <label >Description</label>
             <div >
               <input
@@ -167,7 +170,7 @@ export default function CreateJob () {
               />
             </div>
           </div>
-          <div >
+          <div className={styles.form_fields}>
             <label >Cover Image</label>
             <div>
               <input
@@ -179,7 +182,12 @@ export default function CreateJob () {
               />
             </div>
           </div>
-          <button>Create Book</button>
+          <div>
+
+          </div>
+          <div className={styles.button_container}>
+            <button className={styles.submit_button}>Create Book</button>
+          </div>
         </form>
       </div>
     </div> : <p>Loading Data</p>}

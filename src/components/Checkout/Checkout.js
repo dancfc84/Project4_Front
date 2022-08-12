@@ -6,6 +6,7 @@ import axios from "axios"
 import baseUrl from "../../config"
 import { getLoggedInUserId } from "../../lib/auth"
 import { useNavigate } from "react-router-dom";
+import styles from './Checkout.module.css'
 
 export default function Checkout () {
 
@@ -15,6 +16,7 @@ export default function Checkout () {
 
   const [ user, setUser ] = useState()
   const [ updatedUser, setUpdatedUser ] = useState()
+  const [ showCreditMessage, setShowCreditMessage ] = useState(false)
 
   // eslint-disable-next-line no-unused-vars
   const booksTotal = cartCtx.items.length
@@ -66,7 +68,7 @@ export default function Checkout () {
         credits: newUserBalance,
       });
     } else {
-      console.log("user does not have the credit");
+      setShowCreditMessage(true)
     }
   }
 
@@ -89,22 +91,31 @@ export default function Checkout () {
 
   return (
     <>
-      <section>
-        <h2>Checkout</h2>
-        <div>
-          {booksTotal > 0 ? cartCtx.items.map((item) => {
-            return (
-              <CheckoutItem
-                key={item.id}
-                id={item.id}
-                name={item.name}
-                condition={item.condition}
-                type={item.type}
-              />)
-          }) : <p>Your cart is empty</p>}
-        </div>
-        <div>
-          <button onClick={buyBooksHandler}>Buy Books</button>
+      <section className={styles.section_container}>
+        <div className={styles.checkout_container}>
+          <div className={styles.header_container}>
+            <h2>Checkout</h2>
+          </div>
+          <div>
+            {booksTotal > 0 ? cartCtx.items.map((item) => {
+              return (
+                <CheckoutItem
+                  key={item.id}
+                  id={item.id}
+                  name={item.name}
+                  condition={item.condition}
+                  type={item.type}
+                />)
+          
+            }) : <p>Your cart is empty</p>}
+          </div>
+          <div className={`${styles.price_container}`}>
+            <p><span id={`${styles.total_text}`}>Total</span>{cartCtx.items.length} tokens</p>
+          </div>
+          <div className={styles.buy_button_container}>
+            <button className={styles.buy_book_button} onClick={buyBooksHandler}>Buy Books</button>
+            {showCreditMessage && <p className={styles.noCredit_Message}> You do not have enough credits to make this purchase </p>}
+          </div>
         </div>
       </section>
     </>

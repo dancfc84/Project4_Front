@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import { useParams, useNavigate } from "react-router-dom"
 import baseUrl from "../../config"
+import styles from './EditBook.module.css'
 
 export default function CreateJob () {
 
@@ -25,7 +26,14 @@ export default function CreateJob () {
         const { data } = await axios.get(`${baseUrl}/books/${bookId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
-        setFormData(data)
+        console.log(data);
+        setFormData({
+          name: data[0].name,
+          year_released: data[0].year_released,
+          pages: data[0].pages,
+          description: data[0].description,
+          image: data[0].image,
+        })
       } catch (error) {
         console.log(error);
       }
@@ -62,9 +70,12 @@ export default function CreateJob () {
   
   return <>
     <div >
-      <div >
-        <form onSubmit={handleSubmit}>
-          <div >
+      <div className={styles.text_header}>
+        <h2 className={styles.text_header}>Edit Book</h2>
+      </div>
+      <div className={styles.form_container}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.form_fields}>
             <label >Name</label>
             <div >
               <input
@@ -75,7 +86,7 @@ export default function CreateJob () {
               />
             </div>
           </div>
-          <div>
+          <div className={styles.form_fields}>
             <label >Year Released</label>
             <div >
               <input
@@ -87,7 +98,7 @@ export default function CreateJob () {
 
             </div>
           </div>
-          <div >
+          <div className={styles.form_fields}>
             <label >How many pages</label>
             <div >
               <input
@@ -109,7 +120,7 @@ export default function CreateJob () {
               />
             </div>
           </div>
-          <div >
+          <div className={styles.form_fields}>
             <label >Cover Image</label>
             <div>
               <input
@@ -121,12 +132,15 @@ export default function CreateJob () {
               />
             </div>
           </div>
-          <button>Submit Changes</button>
+   
+          <div className={styles.button_container}>
+            <button className={styles.submit_button}>Submit</button>
+            <button className={styles.discard_button}onClick={handleDiscard}>Discard</button>
+          </div>
         </form>
       </div>
-      <button onClick={handleDiscard}>Discard Changes</button>
-    </div>
 
+    </div>
   </>
 
 }

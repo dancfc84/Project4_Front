@@ -54,8 +54,8 @@ export default function BookListing(props) {
             <p>{listing.type}</p>
           </div>
           <div >
-            {currUser !== listing.user_id ? <button onClick={addToCartHandler}>Add To Cart</button> : <p></p>}
-            {isCreator(listing.user_id) && <button onClick={deleteHandler}>Delete</button>}
+            {currUser !== listing.user_id ? <button className={classes.add_button} onClick={addToCartHandler}>Add To Cart</button> : <p></p>}
+            {isCreator(listing.user_id) && <button className={classes.del_button} onClick={deleteHandler}>Delete</button>}
           </div>
         </div>
       </div>

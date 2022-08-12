@@ -39,7 +39,7 @@ export default function BookComment(props) {
               {props.comment.content}
             </p>
           </div>
-          <div >
+          <div className={classes.comment_button_container}>
             {isCreator(props.comment.user_id) && <button onClick={handleCommentDelete}>Delete</button>}
           </div>
         </div>
