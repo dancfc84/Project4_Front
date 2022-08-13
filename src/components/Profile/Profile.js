@@ -32,7 +32,7 @@ export default function Profile () {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get(`${baseUrl}/books//wishlist/${getLoggedInUserId()}`, {
+        const { data } = await axios.get(`${baseUrl}/books/wishlist/${getLoggedInUserId()}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
         console.log(data);
