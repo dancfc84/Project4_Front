@@ -173,7 +173,6 @@ export default function ShowBook() {
       const { data } = await axios.post(`${baseUrl}/books/${bookId}/comments`, formDataInput, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
-      console.log(data);
       setCreatedComment(data)
       setFormDataInput({
         content: "",
