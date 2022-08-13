@@ -175,8 +175,8 @@ export default function EditProfile () {
             </div>
           </div>
           <div className={styles.button_container}>
-            <button className={styles.submit_button}>Submit Changes</button>
-            <button className={styles.discard_button} onClick={handleDiscard}>Discard Changes</button>
+            <button className={styles.submit_button}>Submit</button>
+            <button className={styles.discard_button} onClick={handleDiscard}>Discard</button>
           </div>
         </form>
       </div>

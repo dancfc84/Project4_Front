@@ -4,12 +4,15 @@ import baseUrl from "../../config"
 import { getLoggedInUserId } from "../../lib/auth"
 import styles from './Profile.module.css'
 import { useNavigate } from "react-router-dom"
+import Wishlist from "../Books/WishlistBook"
 
 export default function Profile () {
 
   const navigate = useNavigate()
 
   const [ profile, setProfile ] = useState({})
+  const [ wishlist, setWishlist ] = useState()
+  const [ removedFromWishlist, setRemovedFromWishlist ] = useState()
 
   useEffect(() => {
     const getData = async () => {
@@ -26,11 +29,27 @@ export default function Profile () {
     getData()
   }, [])
 
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const { data } = await axios.get(`${baseUrl}/books//wishlist/${getLoggedInUserId()}`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        })
+        console.log(data);
+        setWishlist(data)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getData()
+  }, [removedFromWishlist])
+
   const editButtonHandler = () => {
     navigate('/profile/edit')
   }
 
   console.log(profile);
+
 
   return <>
     <section className={styles.profile_section}>
@@ -54,6 +73,23 @@ export default function Profile () {
         </div>
       </div>
 
+      {wishlist && wishlist.length > 0 ? <div className={styles.wishlist_header_container}>
+        <h3>Your Wishlist</h3>
+      </div> : <p></p>}
+
+      <div className={styles.card_container}>
+        {wishlist ? wishlist.map((book, i) => {
+          return <Wishlist
+            key={i}
+            bookInfo={book}
+            setRemovedFromWishlist={setRemovedFromWishlist}
+          />
+
+        })
+          : <p>Loading books</p>
+        }
+
+      </div>
     </section>
   </>
 

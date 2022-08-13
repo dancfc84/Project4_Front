@@ -18,6 +18,9 @@ export default function ShowBook() {
   const [comments, setComments] = useState([])
   const [listings, setListings] = useState([])
 
+  const [likes, setLikes] = useState()
+  const [isHeartRed, setIsHeartRed] = useState()
+
   const [deletedListing, setDeletedListing] = useState([])
   const [createdListing, setCreatedListing] = useState([])
   const [deletedComment, setDeletedComment] = useState([])
@@ -38,7 +41,6 @@ export default function ShowBook() {
 
   useEffect(() => {
     const getData = async () => {
-      console.log("This way");
       try {
         const { data } = await axios.get(`${baseUrl}/books/${bookId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
@@ -52,6 +54,26 @@ export default function ShowBook() {
     getData()
   }, [bookId])
 
+  useEffect(() => {
+    const getData = async () => {
+
+      console.log(currUser, bookId);
+      try {
+        const { data } = await axios.get(`${baseUrl}/books/liked/${currUser}/${bookId}`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        })
+        console.log(data);
+        if (data.length > 0) {
+          setIsHeartRed(true)
+        } else {
+          setIsHeartRed(false)
+        }
+      } catch (error) {
+        console.log(`could not get like information`);
+      }
+    }
+    getData()
+  }, [isHeartRed])
 
   // get comments for the specific book
 
@@ -110,6 +132,36 @@ export default function ShowBook() {
     })
   }
 
+  console.log(isHeartRed);
+  const handleLike = async () => {
+
+    if (isHeartRed === true) {
+      try {
+        const { data } = await axios.delete(`${baseUrl}/books/liked/${getLoggedInUserId()}/${bookId}`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        })
+        console.log(data);
+        setIsHeartRed(false)
+
+      } catch (error) {
+        console.log(error);
+      }
+
+    } else {
+
+      try {
+        console.log("this way liked");
+        const { data } = await axios.post(`${baseUrl}/books/wishlist/${bookId}/${currUser}`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        })
+        console.log(data);
+        setIsHeartRed(true)
+      } catch (error) {
+        console.log("getting like errors");
+      }
+    }
+  }
+
 
   function handleEdit () {
     navigate(`/books/edit/${bookId}`)
@@ -155,6 +207,13 @@ export default function ShowBook() {
                 <figure >
                   <img src={book[0].image} alt={book[0].name} />
                 </figure>
+
+                <div className={classes.likes_container}>
+                  <div onClick={handleLike} className={`${classes.heart} ${isHeartRed && classes.is_active}`}></div>
+                  {/*                   <p>{job.likes} {job.likes > 1 ? "likes" : "like"}</p> */}
+                  {isHeartRed ?  <h4 className={classes.likes_text}>Remove from wishlist</h4> : <h4 className={classes.likes_text}>Add to wishlist</h4>}
+                </div>
+
                 <div className={`${classes.admin_buttons_container}`}>
                   {isCreator(book[0].user_id) && <button className={classes.del_button} onClick={handleDelete}>Delete</button>}
                   {isCreator(book[0].user_id) && <button className={classes.edit_button} onClick={handleEdit}>Edit Book</button>}

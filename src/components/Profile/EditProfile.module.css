@@ -29,21 +29,39 @@
 .submit_button{
   background-color: #FB8500;
   margin-top: 20px;
+  margin-right: 1rem;
   color: #003566;
-  max-width: 200px;
+  max-width: 150px;
   padding: 8px;
   margin: 10px 5px;
   font-family: 'Lato', sans-serif;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  outline: none;
+  resize: none;
+  border: 0;
+  transition: all 0.3s;
+  border-bottom: 2px solid #8ECAE6;
 }
 
 .discard_button{
   background-color: #D2122E;
   margin-top: 20px;
+  margin-right: 1rem;
   color: #003566;
-  max-width: 200px;
+  max-width: 150px;
   padding: 8px;
   margin: 10px 5px;
   font-family: 'Lato', sans-serif;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  outline: none;
+  resize: none;
+  border: 0;
+  transition: all 0.3s;
+  border-bottom: 2px solid #8ECAE6;
 }
 
 input {
