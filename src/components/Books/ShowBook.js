@@ -200,7 +200,7 @@ export default function ShowBook() {
       {book ?
         <div className={`section ${classes.main_container}`}>
           <section className={`section ${classes.book_section}`}>
-            <h2 className={classes.book_title}>Hello {book[0].name}</h2>
+            <h2 className={classes.book_title}>{book[0].name}</h2>
             <div className={`${classes.book_container}`}>
               <div className={`column is-half ${classes.left_col}`}>
                 <figure >
@@ -215,8 +215,8 @@ export default function ShowBook() {
 
                 <div className={`${classes.admin_buttons_container}`}>
                   {isCreator(book[0].user_id) && <button className={classes.del_button} onClick={handleDelete}>Delete</button>}
-                  {isCreator(book[0].user_id) && <button className={classes.edit_button} onClick={handleEdit}>Edit Book</button>}
-                  <button className={classes.sell_button} onClick={showModalHandler}>Sell Book</button>
+                  {isCreator(book[0].user_id) && <button className={classes.edit_button} onClick={handleEdit}>Edit</button>}
+                  <button className={classes.sell_button} onClick={showModalHandler}>Sell</button>
                 </div>
               </div>
               <div className={`column is-half ${classes.right_col}`}>
