@@ -80,7 +80,7 @@ export default function ShowBook() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get(`https://b00k-exchange.herokuapp.com/api/books/${bookId}/comments`, {
+        const { data } = await axios.get(`${baseUrl}/books/${bookId}/comments`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
         setComments(data)
