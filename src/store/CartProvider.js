@@ -65,6 +65,7 @@ export default function CartProvider (props) {
     dispatchCartAction({ type: 'REMOVE', id: id })
   }
 
+  
   const cartContext = {
     items: cartState.items,
     addItem: addItemToCartHandler,

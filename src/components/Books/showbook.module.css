@@ -38,6 +38,9 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0px;
+  padding-bottom: 50px;
+  max-width: 500px;
 }
 
 .right_col h4 {
@@ -48,6 +51,7 @@ body {
 .right_col p {
   font-size: 1rem;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 figure {
@@ -209,6 +213,7 @@ figure {
   display: flex;
   flex-direction: column;
   flex: 1 1 auto;
+  padding:20px;
 }
 
 .comment_listing_container{
@@ -266,6 +271,10 @@ Heart Like Button */
     font-size: 0.7rem;
   }
 
+  .book_title {
+    font-size: 3rem;
+  }
+
 }
 
 @media screen and (min-width: 1000px) {
@@ -273,7 +282,7 @@ Heart Like Button */
 
 
   .book_container h4{
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .book_container p{
