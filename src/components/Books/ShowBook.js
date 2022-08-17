@@ -200,7 +200,7 @@ export default function ShowBook() {
       {book ?
         <div className={`section ${classes.main_container}`}>
           <section className={`section ${classes.book_section}`}>
-            <h2 className={classes.book_title}>{book[0].name}</h2>
+            <h2 className={classes.book_title}>Hello {book[0].name}</h2>
             <div className={`${classes.book_container}`}>
               <div className={`column is-half ${classes.left_col}`}>
                 <figure >
