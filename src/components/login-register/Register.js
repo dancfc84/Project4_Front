@@ -35,6 +35,7 @@ export default function Login () {
     try {
       // eslint-disable-next-line no-unused-vars
       const { data } = await axios.post(`${baseUrl}/register`, formData)
+      console.log(data);
       localStorage.setItem("token", data.token)
       localStorage.setItem("loggedIn", true)
       navigate('/books')
@@ -43,7 +44,6 @@ export default function Login () {
     }
   }
 
-  console.log(formData);
 
   return <>
     <section>

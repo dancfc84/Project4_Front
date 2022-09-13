@@ -44,9 +44,9 @@ const cartReducer = (state, action) => {
 
 export default function CartProvider (props) {
 
-  //returns an array with two items, the cart state and the 
+  //useReducer takes two arguments, initial state and reducer function, returns an array with two items, the current state and the dispatch function
+  //You can then call dispatchCartAction function then the type stipulated will decide what code is executed
   const [ cartState, dispatchCartAction ] = useReducer(cartReducer, defaultCartState);
-
 
 
   useEffect(() => {
@@ -57,7 +57,6 @@ export default function CartProvider (props) {
 
   //These will be called from certain components
   const addItemToCartHandler = (item) => {
-    //Need to add a label to the reducer function, amnd you also need to forwrad the item (: item)
     dispatchCartAction({ type: 'ADD' , item: item })
   }
 

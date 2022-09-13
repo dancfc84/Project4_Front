@@ -57,7 +57,6 @@ export default function ShowBook() {
   useEffect(() => {
     const getData = async () => {
 
-      console.log(currUser, bookId);
       try {
         const { data } = await axios.get(`${baseUrl}/books/liked/${currUser}/${bookId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
@@ -132,7 +131,7 @@ export default function ShowBook() {
     })
   }
 
-  console.log(isHeartRed);
+ 
   const handleLike = async () => {
 
     if (isHeartRed === true) {

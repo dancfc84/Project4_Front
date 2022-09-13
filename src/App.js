@@ -40,7 +40,6 @@ function App() {
 
   return (
     <CartProvider>
-
       <Router>
         <Navbar 
           onShowCart={showCartHandler} />
